@@ -31,27 +31,30 @@ INSERT INTO Books (title, author, price) VALUES ('Dune', 'Frank Herbert', 9.99);
 INSERT INTO Books (title, author, price) VALUES ('The Left Hand of Darkness', 'Ursula K. Le Guin', 8.99);
 INSERT INTO Books (title, author, price) VALUES ('Foundation', 'Isaac Asimov', 7.99);
 INSERT INTO Books (title, author, price) VALUES ('The Player of Games', 'Iain M. Banks', 6.99);
-`
+`;
 
-export const connect = async (): Promise<Database<sqlite3.Database, sqlite3.Statement>> => {
-    try {
-        let mustInitDb = false;
-        if (!existsSync("dd.db")) {
-            mustInitDb = true;
-        }
-
-        return await open({
-            filename: "dd.db",
-            driver: sqlite3.Database,
-        }).then(async (db) => {
-            if (mustInitDb) {
-                await db.exec(schema);
-            }
-            return db
-        }).then(async (db) => await db);
-
-    } catch (error) {
-        console.error(error)
-        exit();
+export const connect = async (): Promise<
+  Database<sqlite3.Database, sqlite3.Statement>
+> => {
+  try {
+    let mustInitDb = false;
+    if (!existsSync("dd.db")) {
+      mustInitDb = true;
     }
-}
+
+    return await open({
+      filename: "dd.db",
+      driver: sqlite3.Database,
+    })
+      .then(async (db) => {
+        if (mustInitDb) {
+          await db.exec(schema);
+        }
+        return db;
+      })
+      .then(async (db) => await db);
+  } catch (error) {
+    console.error(error);
+    exit();
+  }
+};
