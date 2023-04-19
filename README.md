@@ -21,11 +21,11 @@ Start the api using `npm run dev`
 
 I recommend using [`httpie`](https://httpie.io) for testing of HTTP endpoints on the terminal. Tutorials are available elsewhere online, and you're free to use whatever tools you deem appropriate for testing your code.
 
-##Analysis of the existing code
+## Analysis of the existing code
 The primary issue is the absence of input validation, which causes various problems such as accepting any data type in any field (excluding null values which lead to server crashes), server crashes in case of malformed request bodies, and when requested data is missing from the database. Furthermore, the chargeCustomerForPO function is not implemented, and the user is not informed. Providing a message in the response to the user would be helpful.
-
+**
 Following is more detailed anaysis:
-
+**
 •	Lack of Input Validation: The codebase does not include any input validation mechanisms, which leaves the system vulnerable to various types of attacks such as SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF). Input validation is essential to ensure that the data received from users is safe and free from malicious payloads.
 Recommendation: Implement proper input validation mechanisms at each input point, including request parameters, query parameters, request bodies, and headers. Use techniques such as white-list validation, regular expressions, and input sanitization to ensure that only valid and expected data is accepted by the system.
 
