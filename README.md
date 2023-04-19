@@ -50,4 +50,4 @@ The present system is already addressing the issue of SQL injection by preparing
 ##Bugs
 The only issue that was found was when generating a purchase order. The problem was that the query string only had two placeholders instead of the necessary three columns for the orders table. In the purchaseOrders.ts file, the createPurchaseOrder function lacks a ? in the db.run statement, resulting in server crashes when it is executed.
 
-I have defined input validation rules and also used regular expression to validate the input e.g address.
+I have defined input validation rules and also used regular expression to validate the input e.g address. Also implemented the logging and log.txt file is created to store logs. Clean code strategy has been implemented also while making the changes. 
